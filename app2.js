@@ -1,24 +1,27 @@
-const http = require('http')    //Pull in a useful node package
-                                
-const hostname = process.env.hostname || '127.0.0.1'    //get our ip address from the environment
-const port = process.env.port || 3001               //and the port
 
-const server =
-  http.createServer(            //Creates the response loop
-    (req,res)=> {               //Anonymous function to handle the request
-      res.statusCode = 200      //code for OK
-      res.setHeader('Content-Type', 'text/html') //Set the mime type HTML
+const http = require('http')
 
-      res.write('<html> <head> <title> Served </title> </head>')
-      res.write('<body>')
-      res.write('Content \n')
-      res.write('More content \n')
-      res.write('Hello World')    
-      res.end('</body></html>')
-      //Close the response
-    }                           
-)
+const hostname = process.env.hostname || '127.0.0.1'
+const port = process.env.port || 3001
 
-server.listen(port, hostname, () => {   //Start the server
-  console.log(`Server running at http://${hostname}:${port}/`)  //Log the start
+const server = http.createServer((req, res) => {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'text/html')
+
+    res.write('<html><head><title>Devendra Table</title></head>')
+    res.write('<body>')
+    res.write('<h1>Devendra Derangula - Cities I Want to Visit</h1>')
+
+    res.write('<table border="1">')
+    res.write('<tr><th>City</th><th>Country</th><th>Reason</th></tr>')
+    res.write('<tr><td>New York</td><td>USA</td><td>Times Square</td></tr>')
+    res.write('<tr><td>Tokyo</td><td>Japan</td><td>Technology</td></tr>')
+    res.write('<tr><td>Paris</td><td>France</td><td>Eiffel Tower</td></tr>')
+    res.write('</table>')
+
+    res.end('</body></html>')
+})
+
+server.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`)
 })
